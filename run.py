@@ -4,7 +4,7 @@ def iplookup(ip_address):
     data_return = requests.get("http://ipapi.co/" + ip_address + "/json/",{});
     return json.loads(data_return.content);
 
-print("""\033[1;32;40m\n _____          _  __    _____         __                 _             
+print("""\033[1;32m\n _____          _  __    _____         __                 _             
 / _  / ___ _ __(_)/ _|   \_   \_ __   / /  ___   ___ __ _| |_ ___  _ __ 
 \// / / _ \ '__| | |_     / /\/ '_ \ / /  / _ \ / __/ _` | __/ _ \| '__|
  / //\  __/ |  | |  _| /\/ /_ | |_) / /__| (_) | (_| (_| | || (_) | |   
@@ -15,21 +15,21 @@ Version : 1.0
 Github : @ivanwebdevs
 """);
 BLACK = "\033[0;30m"
-RED = "\033[0;31;40m"
-GREEN = "\033[0;32;40m"
-BROWN = "\033[0;33;40m"
-BLUE = "\033[0;34;40m"
-PURPLE = "\033[0;35;40m"
-CYAN = "\033[0;36;40m"
-LIGHT_GRAY = "\033[0;37;40m"
-DARK_GRAY = "\033[1;30;40m"
-LIGHT_RED = "\033[1;31;40m"
-LIGHT_GREEN = "\033[1;32;40m"
-YELLOW = "\033[1;33;40m"
-LIGHT_BLUE = "\033[1;34;40m"
-LIGHT_PURPLE = "\033[1;35;40m"
-LIGHT_CYAN = "\033[1;36;40m"
-LIGHT_WHITE = "\033[1;37;40m"
+RED = "\033[0;31m"
+GREEN = "\033[0;32m"
+BROWN = "\033[0;33m"
+BLUE = "\033[0;34m"
+PURPLE = "\033[0;35m"
+CYAN = "\033[0;36m"
+LIGHT_GRAY = "\033[0;37m"
+DARK_GRAY = "\033[1;30m"
+LIGHT_RED = "\033[1;31m"
+LIGHT_GREEN = "\033[1;32m"
+YELLOW = "\033[1;33m"
+LIGHT_BLUE = "\033[1;34m"
+LIGHT_PURPLE = "\033[1;35m"
+LIGHT_CYAN = "\033[1;36m"
+LIGHT_WHITE = "\033[1;37m"
 BOLD = "\033[1m"
 FAINT = "\033[2m"
 ITALIC = "\033[3m"
@@ -39,14 +39,13 @@ NEGATIVE = "\033[7m"
 CROSSED = "\033[9m"
 
 
-def start():
-    print(LIGHT_GREEN);
-    ip_addressnya = input("IP ADDRESS : ")
+def mulai(ip_addressnya):
     result_track = iplookup(str(ip_addressnya));
    
     if "error" in result_track:
         if result_track['reason'] == "RateLimited":
-            print(f"{RED}Failed to check! Too many request! try again later!");
+            print(f"{RED}Failed to check! Too many request! retrying...");
+            mulai(ip_addressnya);
         else:
             print(f"{RED}{result_track['reason']}");
         
@@ -79,5 +78,10 @@ def start():
 {PURPLE}Country Population : {YELLOW}{result_track['country_population']}
 """);
     start();
+def start():
+    print(LIGHT_GREEN);
+    ip_addressnya = input("IP ADDRESS : ")
+    mulai(ip_addressnya);
+    
 
 start();
