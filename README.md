@@ -14,7 +14,7 @@ Simple Python3 tools to Grab information from IP address
 
 
 ```bash
-  git clone https://github.com/ivanwebdevs/zerif_iplocator && cd zerif_iplocator && pip3 -r requirements.txt
+  git clone https://github.com/ivanwebdevs/zerif_iplocator && cd zerif_iplocator && pip3 install -r requirements.txt
 ```
     
 ## Usage/Examples
